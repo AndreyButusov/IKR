@@ -1,19 +1,17 @@
 package IKR.model;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 public abstract class Animal {
 
     protected String name;
-    protected Date birthday;
-    protected List<String> commands;
+    protected LocalDate birthday;
+    protected StringBuilder commands;
 
-    public Animal(String name, Date birthday){
+    public Animal(String name, LocalDate birthday, StringBuilder commands){
         this.name = name;
         this.birthday = birthday;
-        this.commands = new ArrayList<>();
+        this.commands = commands;
     }
 
     public String getInfo() {
@@ -24,16 +22,20 @@ public abstract class Animal {
         return name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthday;
     }
 
-    public List<String> getCommamds() {
+    public StringBuilder getCommands() {
         return commands;
     }
 
     public void addCommand(String command){
-        this.commands.add(command);
+        this.commands.append(command);
+    }
+
+    public void setCommands(StringBuilder commands) {
+        this.commands = commands;
     }
 
 }
