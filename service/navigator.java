@@ -16,15 +16,17 @@ public class navigator {
         
 
         while (true) {
-            System.out.println("Реестр животных приветствует Вас! \n Введите необходимую операцию: \n 1.Добавить животное. \n 2.Просмотр реестра животных");
+            System.out.println("Реестр животных приветствует Вас! \n Введите необходимую операцию: \n 1.Добавить животное. \n 2.Просмотр реестра животных. \n 3. Вывести список комманд животного");
             int key = iScanner.nextInt();
             switch (key) {
                 case 1:
                     AddAnimal();
-                
                     break;
                 case 2:
                     registry.printRegistry();
+                    break;
+                case 3:
+                    
                 default:
                     break;
         }
