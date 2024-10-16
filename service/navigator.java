@@ -8,12 +8,11 @@ import IKR.service.*;
 
 public class navigator {
 
-    static AnimalRegistry registry = new AnimalRegistry();
+    static AnimalService animalService = new AnimalService();
     
     public static void navigator(){
         
         Scanner iScanner = new Scanner(System.in);
-        
 
         while (true) {
             System.out.println("Реестр животных приветствует Вас! \n Введите необходимую операцию: \n 1.Добавить животное. \n 2.Просмотр реестра животных. \n 3. Вывести список комманд животного");
@@ -23,10 +22,10 @@ public class navigator {
                     AddAnimal();
                     break;
                 case 2:
-                    registry.printRegistry();
+                    animalService.printRegistry();
                     break;
                 case 3:
-                    
+                    animalService.getCommands();
                 default:
                     break;
         }
@@ -36,9 +35,9 @@ public class navigator {
     private static void AddAnimal() {
         Scanner iScanner = new Scanner(System.in);
         System.out.println("Введите нормер класса животного: \n 1.Dog \n 2.Cat \n 3.Hamster \n 4.Camel \n 5.Horse \n 6.Donkey");
-        AnimalService animalService = new AnimalService();
+        // AnimalService animalService = new AnimalService();
         int key1 = iScanner.nextInt();
-        animalService.add(key1);
+        animalService.addAnimal(key1);
     }
 
 }

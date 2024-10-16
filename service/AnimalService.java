@@ -1,12 +1,28 @@
 package IKR.service;
 
 import java.util.Scanner;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.time.LocalDate;
 
 import IKR.model.*;
 
 public class AnimalService {
-    public void add(Integer key) {
+
+    private Map<Class<? extends Animal>, SortedSet<Animal>> animals = new HashMap<>();
+    Scanner iScanner = new Scanner(System.in);
+
+    public void add(Animal animal) {
+        Class<? extends Animal> clazz = animal.getClass();
+        if (!animals.containsKey(clazz)) {
+            animals.put(clazz, new TreeSet<>());
+        }
+        animals.get(clazz).add(animal);
+    }
+    
+    public void addAnimal(Integer key) {
         Scanner iScanner = new Scanner(System.in);
         System.out.println("Вводим имя животного");
         String name = iScanner.next();
@@ -18,13 +34,13 @@ public class AnimalService {
         StringBuilder commands = new StringBuilder(command);
         switch (key) {
             case 1:
-                navigator.registry.add(new Dog(name, LocalDate.parse(birthday), commands));
+                add(new Dog(name, LocalDate.parse(birthday), commands));
                 break;
             case 2:
-                navigator.registry.add(new Cat(name, LocalDate.parse(birthday), commands));
+                add(new Cat(name, LocalDate.parse(birthday), commands));
                 break;
             case 3:
-                navigator.registry.add(new Hamster(name, LocalDate.parse(birthday), commands));
+                add(new Hamster(name, LocalDate.parse(birthday), commands));
                 break;
             default:
                 break;
@@ -34,13 +50,13 @@ public class AnimalService {
             double maxLoadWeight = iScanner.nextDouble();
             switch (key) {
                 case 4:
-                    navigator.registry.add(new Camel(name, LocalDate.parse(birthday), commands, maxLoadWeight));
+                    add(new Camel(name, LocalDate.parse(birthday), commands, maxLoadWeight));
                     break;
                 case 5:
-                    navigator.registry.add(new Horse(name, LocalDate.parse(birthday), commands, maxLoadWeight));
+                    add(new Horse(name, LocalDate.parse(birthday), commands, maxLoadWeight));
                     break;
                 case 6:
-                    navigator.registry.add(new Donkey(name, LocalDate.parse(birthday), commands, maxLoadWeight));
+                    add(new Donkey(name, LocalDate.parse(birthday), commands, maxLoadWeight));
                     break;
             
                 default:
@@ -48,5 +64,28 @@ public class AnimalService {
             }
         }
         System.out.println();
+    }
+
+    public void printRegistry() {
+        for (SortedSet<Animal> animalsOfType : animals.values()) {
+            for (int i = 0; i < animalsOfType.size(); i++) {
+                Animal animal = animalsOfType.toArray(new Animal[animalsOfType.size()])[i];
+                System.out.printf("%d. %s (%s), born on %s, knows: %s\n", i+1, animal.getName(), animal.getClass().getSimpleName(), animal.getBirthDate(), String.join(", ", animal.getCommands()));
+            }
+        }
+    }
+
+    public void getCommands() {
+        System.out.print("Введите имя животного: ");
+        String animalName = iScanner.nextLine().trim();
+        for (SortedSet<Animal> animalsOfType : animals.values()) {
+            for (Animal animal : animalsOfType) {
+                if (animal.getName().equals(animalName)) {
+                    System.out.println(String.join(", ", animal.getCommands()));
+                    return;
+                }
+            }
+        }
+        System.out.println("Животного с таким именем не найдено");
     }
 }

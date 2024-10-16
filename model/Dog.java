@@ -7,5 +7,8 @@ public class Dog extends Pets {
     public Dog(String name, LocalDate birthday, StringBuilder commands) {
         super(name, birthday, commands);
     }
-
+    
+    public StringBuilder getCommands() {
+        return commands;
+    }
 }
