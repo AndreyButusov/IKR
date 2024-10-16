@@ -13,6 +13,8 @@ public class AnimalService {
 
     private Map<Class<? extends Animal>, SortedSet<Animal>> animals = new HashMap<>();
     Scanner iScanner = new Scanner(System.in);
+    private int CounterPets = 0;
+    private int CounterPackAnimal = 0;
 
     public void add(Animal animal) {
         Class<? extends Animal> clazz = animal.getClass();
@@ -23,7 +25,6 @@ public class AnimalService {
     }
     
     public void addAnimal(Integer key) {
-        Scanner iScanner = new Scanner(System.in);
         System.out.println("Вводим имя животного");
         String name = iScanner.next();
         System.out.println("Теперь дату рождения");
@@ -35,12 +36,15 @@ public class AnimalService {
         switch (key) {
             case 1:
                 add(new Dog(name, LocalDate.parse(birthday), commands));
+                CounterPets++;
                 break;
             case 2:
                 add(new Cat(name, LocalDate.parse(birthday), commands));
+                CounterPets++;
                 break;
             case 3:
                 add(new Hamster(name, LocalDate.parse(birthday), commands));
+                CounterPets++;
                 break;
             default:
                 break;
@@ -51,12 +55,15 @@ public class AnimalService {
             switch (key) {
                 case 4:
                     add(new Camel(name, LocalDate.parse(birthday), commands, maxLoadWeight));
+                    CounterPackAnimal++;
                     break;
                 case 5:
                     add(new Horse(name, LocalDate.parse(birthday), commands, maxLoadWeight));
+                    CounterPackAnimal++;
                     break;
                 case 6:
                     add(new Donkey(name, LocalDate.parse(birthday), commands, maxLoadWeight));
+                    CounterPackAnimal++;
                     break;
             
                 default:
@@ -86,7 +93,7 @@ public class AnimalService {
                 }
             }
         }
-        System.out.println("Животного с таким именем не найдено");
+        System.out.println("Животного с таким именем не найдено. \n");
     }
 
     public void setCommand() {
@@ -103,6 +110,11 @@ public class AnimalService {
             }
           }
         }
-        System.out.println("Животного с таким именем не найдено");
-      }
+        System.out.println("Животного с таким именем не найдено. \n");
+    }
+
+    public void CounterAnimals() {
+    System.out.println("Домашние животные: " + CounterPets);
+    System.out.println("Вьючные: " + CounterPackAnimal);
+    } 
 }
