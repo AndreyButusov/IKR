@@ -7,7 +7,7 @@ public class navigator {
     static AnimalService animalService = new AnimalService();
     static Scanner iScanner = new Scanner(System.in);
     
-    public static void navigator(){
+    public static void navigator() gti {
 
         while (true) {
             System.out.println("Реестр животных приветствует Вас! \n Введите необходимую операцию: \n 1.Добавить животное. \n 2.Просмотр реестра животных. \n 3.Вывести список комманд животного. \n 4.Добавление новой команды существующему животному. \n 5.Вывод количества животных в реестре по типам");
