@@ -1,6 +1,5 @@
 package IKR.service;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 import IKR.model.*;
@@ -15,7 +14,7 @@ public class navigator {
         Scanner iScanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Реестр животных приветствует Вас! \n Введите необходимую операцию: \n 1.Добавить животное. \n 2.Просмотр реестра животных. \n 3. Вывести список комманд животного");
+            System.out.println("Реестр животных приветствует Вас! \n Введите необходимую операцию: \n 1.Добавить животное. \n 2.Просмотр реестра животных. \n 3.Вывести список комманд животного. \n 4.Добавление новой комманды существующему живоному.");
             int key = iScanner.nextInt();
             switch (key) {
                 case 1:
@@ -26,6 +25,9 @@ public class navigator {
                     break;
                 case 3:
                     animalService.getCommands();
+                    break;
+                case 4:
+                    animalService.setCommand();
                 default:
                     break;
         }

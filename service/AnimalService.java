@@ -88,4 +88,21 @@ public class AnimalService {
         }
         System.out.println("Животного с таким именем не найдено");
     }
+
+    public void setCommand() {
+        System.out.print("Введите имя животного: ");
+        String animalName = iScanner.nextLine().trim();
+        for (SortedSet<Animal> animalsOfType : animals.values()) {
+          for (Animal animal : animalsOfType) {
+            if (animal.getName().equals(animalName)) {
+              System.out.print("Введите новую команду: ");
+              String newCommand = iScanner.nextLine().trim();
+              animal.getCommands().append(", " + newCommand);
+              System.out.println("Команда добавлена.");
+              return;
+            }
+          }
+        }
+        System.out.println("Животного с таким именем не найдено");
+      }
 }
